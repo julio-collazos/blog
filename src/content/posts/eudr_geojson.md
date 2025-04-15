@@ -15,7 +15,7 @@ draft: false
 
 El 29 de junio de 2023, la **Regulación en Productos Libres de Deforestación (EUDR)** entró en vigor en la Unión Europea (UE). Esta norma afecta a empresas que importan o comercializan productos como ganado 🐄, cacao 🍫, café ☕, palma de aceite 🌴, caucho 🌳, soja 🌱 y madera 🪵, o derivados como cuero, chocolate o muebles. Su objetivo es garantizar que estos productos no provengan de áreas deforestadas o degradadas después del **31 de diciembre de 2020**.
 
-Para cumplir con la EUDR, las empresas deben enviar información geográfica precisa sobre los lugares de producción en un formato llamado **GeoJSON**. Si no estás familiarizado con sistemas de información geográfica (GIS), no te preocupes: esta guía te explicará todo paso a paso, con ejemplos claros y sin jerga técnica complicada.
+Para cumplir con la EUDR, las empresas deben enviar información geográfica precisa sobre los lugares de producción en un formato llamado **GeoJSON**. Si no estás familiarizado con sistemas de información geográfica (GIS), no te preocupes: esta guía te explicará todo paso a paso.
 
 Para más información oficial, consulta: [Regulación EUDR](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R1115).
 
@@ -23,7 +23,7 @@ Para más información oficial, consulta: [Regulación EUDR](https://eur-lex.eur
 
 ## ¿Qué es un archivo GeoJSON? 🌍📝
 
-Piensa en un archivo **GeoJSON** como una forma de dibujar en un mapa digital usando texto. Es una manera sencilla de describir ubicaciones (como un punto donde está una finca) o formas (como el contorno de un campo) para que una computadora pueda entenderlas y mostrarlas.
+Piensa en un archivo **GeoJSON** como una forma de dibujar en un mapa digital usando texto. Es una manera sencilla de describir ubicaciones (como un punto donde está una finca) o formas (como el contorno de un predio) para que una computadora pueda entenderlas y mostrarlas.
 
 GeoJSON está basado en **JSON**, un formato de texto común que organiza información de forma estructurada. No necesitas ser un experto en tecnología para usarlo: puedes abrirlo y editarlo con cualquier editor de texto, como el Bloc de Notas, aunque normalmente se usa en aplicaciones de mapas.
 
@@ -34,6 +34,7 @@ Un archivo GeoJSON tiene tres partes principales:
 1. **Geometrías**: La forma o ubicación que quieres describir:
    - **Punto (Point)**: Una sola ubicación, como un marcador en Google Maps.
    - **Polígono (Polygon)**: Una forma cerrada, como el borde de un terreno.
+   - **Líneas (LineString)**: Una forma abierta, que normalmente representa elementos lineales como vías, drenajes, entre otros elementos.
    - También existen colecciones como **MultiPoint** (varios puntos) y **MultiPolygon** (varios polígonos).
 
 2. **Propiedades**: Datos extra sobre la geometría, como el nombre del lugar o del productor.
@@ -42,7 +43,7 @@ Un archivo GeoJSON tiene tres partes principales:
 
 ### Ejemplo básico de GeoJSON
 
-Para hacerte a una idea de como se representa la información geográfica dentro de un mapa, acontinuación se muestra un mapa interactivo con las coordenadas de 2 ciudades en indonesia (para ver el código del mapa puedes ir al siguiente enlace en [Observable](https://observablehq.com/d/43d64c5d5e261afd))
+Para hacerte a una idea de como se representa la información geográfica dentro de un mapa, a continuación se muestra un mapa interactivo con las coordenadas de 2 ciudades en Indonesia (para ver el código del mapa puedes ir al siguiente enlace en [Observable](https://observablehq.com/d/43d64c5d5e261afd)).
 
 <iframe width="100%" height="576" frameborder="0"
   src="https://observablehq.com/embed/43d64c5d5e261afd?cells=viewof+map"></iframe>
@@ -66,7 +67,7 @@ Ya que has explorado un poco como interactuan los datos geográficos dentro de u
 - **"properties"**: Aquí va información adicional, como el nombre.
 - **"geometry"**: Indica que es un punto y da sus coordenadas.
 
-Si quieres delimitar un terreno como un polígono, se vería así:
+Si quieres delimitar un lote como un polígono, se vería así:
 
 ```json
 {
@@ -95,9 +96,9 @@ La EUDR exige que las empresas demuestren que sus productos no vienen de áreas 
 
 ### Requisitos clave
 
-- **Ubicaciones precisas**: Debes dar las coordenadas de los lugares de producción (fincas, campos, etc.).
-- **Formato GeoJSON**: Es el único formato aceptado por el Sistema de Información EUDR.
-- **Verificación**: Las autoridades usan esta información para comprobar si hubo deforestación o degradación en esas áreas.
+- **Ubicaciones precisas**: Debes dar las coordenadas de los lugares de producción (fincas, lotes, etc.).
+- **Formato GeoJSON**: Es el único formato aceptado por el Sistema de Información EUDR hasta el momento.
+- **Verificación**: Las entidades competentes usarán esta información para comprobar si hubo deforestación o degradación en esas áreas.
 
 ### Términos importantes
 
@@ -166,10 +167,12 @@ Aquí tienes un archivo GeoJSON para declarar un campo en Brasil:
 - **"FeatureCollection"**: Permite incluir varias geometrías (aunque aquí solo hay una).
 - **"Polygon"**: Define el contorno del campo con cuatro puntos.
 
-Como ejemplo ilustrativo se muestra un mapa interactivo con poligonos de producción de Palma de Aceite en Colombia siguiendo los requerimientos minimos de la EUDR. En este ejemplo los campos son alterados al momento de visualizarlos pero la estructura del archivo GeoJSON es fiel a los requerimientos técnicos establecidos, para más información vista el código del ejemplo construido en [Observable](https://observablehq.com/d/b7f63b57427a202f)
+Como ejemplo ilustrativo se muestra un mapa interactivo con polígonos de producción de Palma de Aceite en Colombia siguiendo los requerimientos minimos de la EUDR. 
 
 <iframe width="100%" height="576" frameborder="0"
   src="https://observablehq.com/embed/b7f63b57427a202f?cells=viewof+map"></iframe>
+
+> En este ejemplo los campos son alterados al momento de visualizarlos pero la estructura del archivo GeoJSON es fiel a los requerimientos técnicos establecidos, para más información vista el código del ejemplo construido en [Observable](https://observablehq.com/d/b7f63b57427a202f)
 
 ---
 ## Tipos de archivos GeoJSON para la EUDR
@@ -196,8 +199,8 @@ Estos son problemas típicos y cómo solucionarlos:
    - **Solución**: Revisa que la lista de coordenadas termine donde empezó.
 
 2. **Coordenadas duplicadas**:
-   - **Problema**: Dos puntos se redondean al mismo valor.
-   - **Solución**: Usa más decimales o ajusta las posiciones.
+   - **Problema**: Dos puntos se redondean al mismo valor (el sistema de la EUDR espera que las coordenadas presenten un máximo de 6 decimales por lo cual se pueden encontrar coordenadas iguales al aproximar puntos cercanos).
+   - **Solución**: Ajusta las posiciones y trata de que los puntos no queden muy cerca entre sí al dibujar los polígono.
 
 3. **Líneas cruzadas**:
    - **Problema**: El polígono tiene intersecciones.
@@ -205,7 +208,7 @@ Estos son problemas típicos y cómo solucionarlos:
 
 4. **Errores en propiedades**:
    - **Problema**: Escribir `"area"` en lugar de `"Area"`.
-   - **Solución**: Usa las mayúsculas y minúsculas correctas.
+   - **Solución**: Lee muy bien la documentación y establece formatos que te permitan minimizar este tipo de errores.
 
 **Truco**: Prueba tu archivo en [GeoJSON.io](https://geojson.io/) para ver si se dibuja bien antes de enviarlo.
 
