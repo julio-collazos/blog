@@ -1,5 +1,5 @@
 ---
-title: Validación de Datos Geoespaciales para el Cumplimiento del EUDR: Análisis Técnico
+title: 'Validación de Datos Geoespaciales para el Cumplimiento del EUDR: Análisis Técnico'
 published: 2025-10-05
 updated: 2025-10-05
 description: 'Validate, clean, and prepare your geospatial data for EUDR.'
@@ -9,6 +9,8 @@ category: 'Blog'
 lang: es
 draft: false 
 ---
+
+
 <p align="center">
 Image generated with ChatGPT (DALL·E), OpenAI, 2025.
 </p>
